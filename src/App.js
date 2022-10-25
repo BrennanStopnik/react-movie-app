@@ -5,6 +5,9 @@ import MovieLayout from './Layouts/MovieLayout';
 import NavLayout from './Layouts/NavLayout';
 import HomePage from './Pages/HomePage'
 import MovieListPage from './Pages/MovieListPage';
+// import ErrorPage from "./ErrorPage";
+import MoviePage from "./Pages/MoviePage";
+import MovieFormPage from "./Pages/MovieFormPage";
 
 const sampleMovies = [
   {
@@ -484,6 +487,53 @@ const sampleMovies = [
 const App = () => {
   const [movieList, setMovieList] = useState(sampleMovies)
 
+  const handleAddMovie = (
+    title,
+    director,
+    movieYear,
+    rated,
+    released,
+    runtime,
+    genre,
+    writer,
+    actors,
+    plot,
+    language,
+    country,
+    awards,
+    metascore,
+    imdbRating,
+    imdbVotes,
+    imdbID,
+    type,
+    image
+  ) => {
+    const newMovie = {
+      Title: title,
+      Director: director,
+      Year: movieYear,
+      Rated: rated,
+      Released: released,
+      Runtime: runtime,
+      Genre: genre,
+      Writer: writer,
+      Actors: actors,
+      Plot: plot,
+      Language: language,
+      Country: country,
+      Awards: awards,
+      Metascore: metascore,
+      imdbRating,
+      imdbVotes,
+      imdbID,
+      Type: type,
+      Images: image,
+    };
+    setMovieList([...movieList, newMovie])
+  }
+
+  
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -500,6 +550,14 @@ const App = () => {
             {
               index: true,
               element: <MovieListPage movieList={movieList}/>
+            },
+            {
+              path: "title",
+              element: <MoviePage movieList={movieList}/>
+            },
+            {
+              path: "form",
+              element: <MovieFormPage handleAddMovie={handleAddMovie} />
             }
           ]
         }
